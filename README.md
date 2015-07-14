@@ -8,6 +8,9 @@ Multiplayer version, you can play against your friend.
 To play just click on index.html or visit
 http://csiszi.github.io/frontend-nanodegree-arcade-game
 
+## Where to find JSDoc
+http://csiszi.github.io/frontend-nanodegree-arcade-game/out
+
 ## How to play
 
 Start the game with selecting the number of players (1 or 2 with keys 1 or 2).
