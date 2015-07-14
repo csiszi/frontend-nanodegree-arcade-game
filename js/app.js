@@ -67,7 +67,7 @@ var Game = {
 };
 
 /**
- * GameObject prototypes. I couldn't find
+ * GameObject prototypes.
  * @constructor
  */
 var GameObject = function() {
@@ -76,7 +76,7 @@ var GameObject = function() {
 };
 
 /**
- * Eender Game Object
+ * Render Game Object
  * @return {bool} success
  */
 GameObject.prototype.render = function() {
