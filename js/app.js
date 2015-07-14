@@ -6,7 +6,7 @@
  * Game constants, variables and functions
  * @type {Object}
  */
-var game = {
+var Game = {
   MAX_COL: 4,
   MAX_ROW: 5,
   TILE_HEIGHT: 83,
@@ -23,19 +23,19 @@ var game = {
     // check if it good key
     if (!key) return false;
     // initialize enemies
-    for (var i = 0; i < game.ENEMY_COUNT; i++) {
+    for (var i = 0; i < Game.ENEMY_COUNT; i++) {
       allEnemies.push(new Enemy());
     }
     // add the correct number of players and start the game
     switch (key) {
       case 1:
         allPlayers.push(new Player(0));
-        game.start();
+        Game.start();
         break;
       case 2:
         allPlayers.push(new Player(0));
         allPlayers.push(new Player(1));
-        game.start();
+        Game.start();
         break;
     }
     return true;
@@ -50,7 +50,7 @@ var game = {
       49: 1,
       50: 2
     };
-    game.handleInput(allowedKeys[e.keyCode]);
+    Game.handleInput(allowedKeys[e.keyCode]);
     return true;
   },
   /**
@@ -58,8 +58,8 @@ var game = {
    * @return {bool} success
    */
   start: function() {
-    document.removeEventListener('keyup', game.eventListener);
-    game.started = true;
+    document.removeEventListener('keyup', Game.eventListener);
+    Game.started = true;
     document.getElementById('controls')
       .innerHTML = '';
     return true;
@@ -109,7 +109,8 @@ Enemy.prototype.update = function(dt) {
 Enemy.prototype.checkCollision = function(player) {
   // Makes the game a little easier (harder to collide)
   var threshold = 25;
-  if (player.x > (this.x - player.width + threshold * 2) && player.x < (this.x + this.width - threshold) &&
+  if (player.x > (this.x - player.width + threshold * 2) && player.x < (this.x +
+      this.width - threshold) &&
     player.row === this.row) {
     player.lives--;
     player.refreshPoints();
@@ -145,7 +146,7 @@ Enemy.prototype.randomSpeed = function() {
  */
 Enemy.prototype.randomRow = function() {
   this.row = Math.floor(Math.random() * 3 + 1);
-  this.y = this.row * game.TILE_HEIGHT - 23;
+  this.y = this.row * Game.TILE_HEIGHT - 23;
   return true;
 };
 
@@ -211,7 +212,7 @@ Player.prototype.refreshPoints = function() {
     return true;
   }
   // show the lives and score if it's started
-  if (game.started) {
+  if (Game.started) {
     ctx.font = '30px Impact';
     ctx.fillStyle = 'black';
     ctx.fillText('Lives: ' + this.lives, 400, 30 + this.canvasTop);
@@ -259,7 +260,7 @@ Player.prototype.checkZeroLife = function() {
  * Check if the game is ended (noone lives)
  * @return {bool} success
  */
-Player.prototype.checkGameEnd = function(){
+Player.prototype.checkGameEnd = function() {
   var gameEnd = true;
   allPlayers.forEach(function(player) {
     if (player.lives > 0) gameEnd = false;
@@ -303,7 +304,7 @@ Player.prototype.goToStart = function() {
  * @return {number}     The x calculated from the column
  */
 Player.prototype.xFromCol = function(col) {
-  return (col * game.TILE_WIDTH);
+  return (col * Game.TILE_WIDTH);
 };
 
 /**
@@ -312,7 +313,7 @@ Player.prototype.xFromCol = function(col) {
  * @return {number}     The y calculated from the row
  */
 Player.prototype.yFromRow = function(row) {
-  return (row * game.TILE_HEIGHT) - 23;
+  return (row * Game.TILE_HEIGHT) - 23;
 };
 
 /**
@@ -340,13 +341,13 @@ Player.prototype.handleInput = function(key) {
         this.checkRiver();
         break;
       case 'down':
-        if (this.row < game.MAX_ROW) this.row++;
+        if (this.row < Game.MAX_ROW) this.row++;
         break;
       case 'left':
         if (this.col > 0) this.col--;
         break;
       case 'right':
-        if (this.col < game.MAX_COL) this.col++;
+        if (this.col < Game.MAX_COL) this.col++;
         break;
     }
     return true;
@@ -399,4 +400,4 @@ var allPlayers = [];
 
 
 // event listener for game settings
-document.addEventListener('keyup', game.eventListener);
+document.addEventListener('keyup', Game.eventListener);
