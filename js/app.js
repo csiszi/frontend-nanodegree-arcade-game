@@ -390,7 +390,7 @@ Player.prototype.eventListener = function(e) {
  * Array with every enemy
  * @type {Array}
  */
-var allEnemies = []
+var allEnemies = [];
 
 /**
  * Array with every player
