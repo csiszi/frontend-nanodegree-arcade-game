@@ -1,5 +1,6 @@
 // game variables and functions
-// It could be an object, but there won't be more than 1 game..
+// It could be an object, but there won't be more than 1 game...
+// Or it's still a good idea?
 
 var game = {
   maxCol: 4,
