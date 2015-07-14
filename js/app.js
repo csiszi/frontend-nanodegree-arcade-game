@@ -78,7 +78,7 @@ Enemy.prototype.update = function(dt) {
 
 // Check if this enemy hits the player
 Enemy.prototype.checkCollision = function(player) {
-  if (player.x > (this.x + 10) && player.x < (this.x + this.width - 10) &&
+  if (player.x > (this.x - player.width + 50) && player.x < (this.x + this.width - 30) &&
     player.row === this.row) {
     player.lives--;
     player.refreshPoints();
