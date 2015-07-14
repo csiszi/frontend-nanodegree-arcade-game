@@ -67,20 +67,37 @@ var Game = {
 };
 
 /**
+ * GameObject prototypes. I couldn't find
+ * @constructor
+ */
+var GameObject = function() {
+    this.width = 101;
+    this.height = 171;
+};
+
+/**
+ * Eender Game Object
+ * @return {bool} success
+ */
+GameObject.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    return true;
+};
+
+/**
  * Enemy objects
  * @constructor
  */
 var Enemy = function() {
-  // Variables applied to each of our instances go here,
-  // we've provided one for you to get started
-
   // The image/sprite for our enemies, this uses
   // a helper we've provided to easily load images
+  GameObject.call(this);
   this.sprite = 'images/enemy-bug.png';
-  this.width = 101;
-  this.height = 171;
   this.init();
 };
+
+Enemy.prototype = Object.create(GameObject.prototype);
+Enemy.prototype.constructor = Enemy;
 
 /**
  * Update the Enemy object
@@ -160,23 +177,12 @@ Enemy.prototype.randomStart = function() {
 };
 
 /**
- * Render the Enemy
- * @return {bool} success
- */
-Enemy.prototype.render = function() {
-  return ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
-/**
  * Represents a player
  * @constructor
  * @param {number} id id of the player
  */
 var Player = function(id) {
+  GameObject.call(this);
   this.id = id;
   if (this.id > 0) {
     this.sprite = 'images/char-boy.png';
@@ -188,13 +194,14 @@ var Player = function(id) {
   document.addEventListener('keyup', this.eventListener.bind(this));
   // set starting col/row
   this.goToStart();
-  this.width = 101;
-  this.height = 171;
   this.lives = 5;
   this.score = 0;
   this.canMove = true;
   this.canvasTop = this.id * 605;
 };
+
+Player.prototype = Object.create(GameObject.prototype);
+Player.prototype.constructor = Player;
 
 /**
  * Refresh the lives and scores of the player
@@ -227,6 +234,8 @@ Player.prototype.refreshPoints = function() {
  * @return {bool} success
  */
 Player.prototype.update = function() {
+  this.x = this.xFromCol(this.col);
+  this.y = this.yFromRow(this.row);
   return this.refreshPoints();
 };
 
@@ -316,16 +325,6 @@ Player.prototype.yFromRow = function(row) {
   return (row * Game.TILE_HEIGHT) - 23;
 };
 
-/**
- * Render player
- * @return {bool} success
- */
-Player.prototype.render = function() {
-  this.x = this.xFromCol(this.col);
-  this.y = this.yFromRow(this.row);
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  return true;
-};
 
 /**
  * Handle player inputs
