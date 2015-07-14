@@ -1,6 +1,13 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Forked from udacity frogger project.
 
-for self-checking their submission.
+Multiplayer version, you can play against your friend.
+
+Start the game with selecting the number of players (1 or 2 with keys 1 or 2).
+
+Controls:
+
+- Player 1: Arrows
+- Player 2: W S A D
